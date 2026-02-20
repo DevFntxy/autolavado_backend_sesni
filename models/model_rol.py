@@ -1,12 +1,11 @@
 """Esta clase permite generar el modelo para los tipos de rol"""
 
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from sqlalchemy.orm import relationship
 from config.db import Base
 from datetime import datetime
 
-
 class Rol(Base):
-    """Creación de la tabla de roles en MySQL"""
 
     __tablename__ = "tbc_roles"
 
@@ -20,3 +19,4 @@ class Rol(Base):
         default=datetime.utcnow,
         onupdate=datetime.utcnow
     )
+    usuarios = relationship("Usuario", back_populates="rols")    

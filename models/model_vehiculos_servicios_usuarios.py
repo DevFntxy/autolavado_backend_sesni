@@ -1,12 +1,4 @@
-from sqlalchemy import (
-    Column,
-    Integer,
-    ForeignKey,
-    DateTime,
-    Time,
-    Boolean,
-    DECIMAL
-)
+from sqlalchemy import Column, Integer, ForeignKey, DateTime, Time, Boolean
 from config.db import Base
 from datetime import datetime
 
@@ -14,12 +6,12 @@ from datetime import datetime
 class AutoServicio(Base):
     __tablename__ = "tbd_vehiculos_servicios_usuarios"
 
-    iD = Column(Integer, primary_key=True, index=True)
+    id = Column("Id", Integer, primary_key=True, index=True)
 
-    vehiculo_id = Column(Integer, ForeignKey("tbb_vehiculos.Id"))
-    cajero_Id = Column(Integer, ForeignKey("tbb_usuarios.Id"))
-    operador_Id = Column(Integer, ForeignKey("tbb_usuarios.Id"))
-    servicio_Id = Column(Integer, ForeignKey("tbc_servicios.Id"))
+    vehiculo_id = Column(Integer, ForeignKey("tbc_vehiculos.Id"))
+    cajero_id = Column(Integer, ForeignKey("tbb_usuarios.Id"))
+    operador_id = Column(Integer, ForeignKey("tbb_usuarios.Id"))
+    servicio_id = Column(Integer, ForeignKey("tbc_servicios.Id"))
 
     fecha = Column(DateTime)
     hora = Column(Time)
