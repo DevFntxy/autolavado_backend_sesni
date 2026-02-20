@@ -1,29 +1,30 @@
-"""Esta clase permite generar el modelo para los tipos de user"""
-
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime
+from sqlalchemy.orm import relationship
 from config.db import Base
 from datetime import datetime
+from passlib.context import CryptContext
+from passlib.exc import UnknownHashError
 
 
 class Usuario(Base):
     __tablename__ = "tbb_usuarios"
 
-    Id = Column(Integer, primary_key=True, index=True)
-    rol_Id = Column(Integer, ForeignKey("tbc_roles.Id"))
+    id = Column("Id", Integer, primary_key=True, index=True)
+    rol_id = Column("rol_Id", Integer, ForeignKey("tbc_roles.Id"))
 
-    nombre = Column(String(60))
-    primer_apellido = Column(String(60))
-    segundo_apellido = Column(String(60))
-    direccion = Column(String(200))
-    correo_electronico = Column(String(100))
-    numero_telefono = Column(String(20))
-    contrasena = Column(String(40))
-
+    nombre = Column(String(60), nullable=False)
+    primer_apellido = Column(String(60), nullable=False)
+    segundo_apellido = Column(String(60), nullable=True)
+    direccion = Column(String(200), nullable=True)
+    correo_electronico = Column(String(100), nullable=False, unique=True)
+    numero_telefono = Column(String(20), nullable=True)
+    contrasena = Column(String(255), nullable=False)
     estatus = Column(Boolean, default=True)
-
     fecha_registro = Column(DateTime, default=datetime.utcnow)
     fecha_actualizacion = Column(
         DateTime,
         default=datetime.utcnow,
         onupdate=datetime.utcnow
     )
+
+    rols = relationship("Rol", back_populates="usuarios")

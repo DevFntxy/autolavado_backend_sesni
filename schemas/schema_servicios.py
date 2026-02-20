@@ -1,7 +1,3 @@
-"""
-Esquemas Pydantic para Servicio
-"""
-
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -11,10 +7,7 @@ class ServicioBase(BaseModel):
     descripcion: str | None = None
     costo: float
     duracion: int | None = None
-    estado: bool
-
-    fecha_registro: datetime
-    fecha_actualizacion: datetime
+    estado: bool = True
 
 
 class ServicioCreate(BaseModel):
@@ -34,6 +27,8 @@ class ServicioUpdate(BaseModel):
 
 class Servicio(ServicioBase):
     Id: int
+    fecha_registro: datetime
+    fecha_actualizacion: datetime
 
     class Config:
         orm_mode = True

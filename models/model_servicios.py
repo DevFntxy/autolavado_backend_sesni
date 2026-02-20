@@ -11,7 +11,7 @@ class Servicio(Base):
     nombre = Column(String(80), nullable=False)
     descripcion = Column(String(150))
     costo = Column(Float, nullable=False)
-    duracion = Column(Integer)  # por ejemplo, en minutos
+    duracion = Column(Integer)
     estado = Column(Boolean, default=True)
 
     fecha_registro = Column(DateTime, default=datetime.utcnow)

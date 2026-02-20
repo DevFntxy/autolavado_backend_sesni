@@ -2,20 +2,19 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime
 from config.db import Base
 from datetime import datetime
 
-
 class Vehiculo(Base):
     __tablename__ = "tbc_vehiculos"
 
-    Id = Column(Integer, primary_key=True, index=True)
-    usuario_Id = Column(Integer, ForeignKey("tbb_usuarios.Id"))
+    id = Column("Id", Integer, primary_key=True, index=True)
+    usuario_id = Column("usuario_Id", Integer, ForeignKey("tbb_usuarios.Id"))
 
-    modelo = Column(String(45))
-    marca = Column(String(45))
-    placa = Column(String(45))
-    serie = Column(String(45))
-    color = Column(String(45))
-    tipo = Column(String(45))
-    anio = Column(Integer)
+    modelo = Column(String(45), nullable=False)
+    marca = Column(String(45), nullable=False)
+    placa = Column(String(45), nullable=False, unique=True)
+    serie = Column(String(45), nullable=True)
+    color = Column(String(45), nullable=True)
+    tipo = Column(String(45), nullable=True)
+    anio = Column(Integer, nullable=True)
 
     estatus = Column(Boolean, default=True)
 
